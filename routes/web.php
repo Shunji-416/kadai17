@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'admin'], function(){
+    Route::get('news/create', 'Admin\NewsController@add');
+});
+
+//課題4
+Route::get('admin/profile/create',
+'Profile\NewsController@add');
+
+Route::get('admin/profile/edit',
+'Profile\Controller@edit');
