@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'admin'], function(){
-    Route::get('news/create', 'Admin\NewsController@add');
+    Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');
 });
 
 //課題4
@@ -25,3 +25,7 @@ Route::get('admin/profile/create',
 
 Route::get('admin/profile/edit',
 'Profile\Controller@edit');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
