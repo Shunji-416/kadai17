@@ -21,10 +21,10 @@ Route::group(['prefix' => 'admin'], function(){
 
 //課題4
 Route::get('admin/profile/create',
-'Profile\NewsController@add');
+'Admin\ProfileController@add');
 
 Route::get('admin/profile/edit',
-'Profile\Controller@edit');
+'Admin\ProfileController@edit');
 
 Auth::routes();
 
