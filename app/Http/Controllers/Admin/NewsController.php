@@ -94,15 +94,14 @@ public function create(Request $request)
       // 該当するデータを上書きして保存する
       $news->fill($news_form)->save();
       
-      $history = new history;
-      $history->news_id = news_id
+      $history = new History;
+      $history->news_id = $news->id;
       $history->edited_at = Carbon::now();
       $history->save();
       
       return redirect('admin/news');
   }    
-  
-  // 以下を追記　　
+ 
   public function delete(Request $request)
   {
       // 該当するNews Modelを取得

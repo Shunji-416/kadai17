@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Profile;
 
+use App\ProfileHistory;
+use Carbon\Carbon;
+
+
 class ProfileController extends Controller
 {
     public function add()
@@ -34,7 +38,7 @@ class ProfileController extends Controller
       if (empty($profile)) {
         abort(404);    
       }
-        return view('admin.profile.create', ['profile_form' => $profile]);
+        return view('admin.profile.edit', ['profile_form' => $profile]);
     }
 
     public function update(Request $request)
@@ -47,6 +51,11 @@ class ProfileController extends Controller
       unset($profile_form['remove']);
 
       $profile->fill($profile_form)->save();
+      
+      $profilehistory = new ProfileHistory;
+      $profilehistory->profile_id = $profile->id;
+      $profilehistory->edited_at = Carbon::now();
+      $profile->save();
 
       return redirect('admin/profile');
   }
